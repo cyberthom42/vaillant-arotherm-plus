@@ -1,0 +1,4 @@
+ID,,Heizobjekt/Standort,,,Heizgerät,,Meta/Einstellungen,,,,,Daten,,,,,,,,,,
+#,User,beheizte Fläche (m²),Dämmstandard (KfW),H't [W/(m²K)],Typ Modell WP,Wärmequelle,Jahr - Monat,Heizkurve,WT (Wunschtemp /Raumtemp SOLL in °C),RT (durch. IST Raumtemp),Außentemp (Mittelwert lt. Wetterkontor in °C),Gesamtverbrauch (Hz+WW Strom in kWh),Energieertrag (Heizen in kWh),Stromverbrauch (Heizen in kWh),Stromverbrauch (WW in kWh),Energiertrag (WW in kWh),Arbeitszahl Ges (lt Gerät),AZ Hz (lt. Gerät),AZ WW (lt. Gerät),Kompressorlaufz (in h),Komp. Schaltvorgänge,Messgerät
+1,Tolentino,162,70,0.344,arotherm plus VWL 75/6 + Unitower,Luft,2023-01,0.2,21.5,22.5,4.7,574,401,,,19,1.2,1.2,1.2,1300,79,Unitower
+2,Tolentino,162,70,0.344,arotherm plus VWL 75/6 + Unitower,Luft,2022-12,0.2,21.5,22.5,1.95,624,,,,,1.2,1.2,1.2,1753,27,Unitower
