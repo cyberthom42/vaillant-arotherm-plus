@@ -1,0 +1,67 @@
+# type (r[1-9];w;u),circuit,name,[comment],[QQ],ZZ,PBSB,[ID],field1,part (m/s),datatypes/templates,divider/values,unit,comment
+#,UIH00,CI,UIH00 169,,,,,,,,,,
+*r,,,,,,"B509","0D",,,,,,
+*w,,,,,,"B509","0E",,,,,,
+*wi,#install,,,,,"B509","0E",,,,,,
+*ws,#service,,,,,"B509","0E",,,,,,
+*[SW],scan,,,SW,,,,,,,,,
+# ##### Energieertrag #####,,,,,,,,,,,,,
+[SW<=349]!include,yield8485.inc,,,,,,,,,,,,
+[SW=350-363]!include,yield8485r.inc,,,,,,,,,,,,
+[SW>=364]!include,yield8485.inc,,,,,,,,,,,,
+[SW>=202]r,,YieldSum,Earned energy UI display value,,,,"8700",,,ULG,,,
+# ##### Parameter und Informationen #####,,,,,,,,,,,,,
+r,,OutsideTemp,Aussentemperatur,,,,"0100",,,tempsensor,,,Außentemperatur
+r;ws,,EhpHydraulicMap,Hydraulikschema (EHP),,,,"2900",,,UCH,,,Hydraulikschema
+r,,EhpBasicStatus,Status,,,,"5000",,,UCH,,,AMU Status
+r,,StateEM,Status Energiemanger,,,,"4B00",,,UCH,,,"Status des Energie-Manager:0: Aus,1: WW Anforderungt,2: WW Betrieb3 WW Nachlauf4: Heizbetrieb5: Überdruck im WW Betrieb6: Überdruck im Heizbetrieb7: Wartezustand Überdruck8: Wartezustand Heizung9: Wartezustand WW"
+r;w,,LanguageVariant,Sprachvariante,,,,"2600",,,UCH,,,Sprache
+r;w,,HolidayPeriods,Ferienzeitraum,,,,"4300",,,hfrom;hto;hfrom;hto,,,Ferienzeitraum
+r;w,,RoomTempHoliday,Raumsollwert im Ferienbetrieb,,,,"2200",,,temp,,,Raumsolltemperatur für den Ferienbetrieb
+r;wi,,KeyCodeforConfigMenu,Passwort für das Konfigurationsmenü,,,,"2C00",,,HEX:4,,,Code für die Konfigurationsmenüs
+r,,FlowTempDesired,Vorlauftemp. SOLL,,,,"0500",,,temp,,,
+r,,FlowTemp,Vorlauftemp. IST,,,,"0200",,,tempsensor,,,Anlagenvorlauftemperatur
+r;wi,,HcSupportTimeMax,Max. Heizzeit,,,,"4D00",,,minutes0,,,Max.Heizbetriebszeit bei parallel anstehender WW Anforderung
+r;wi,,HwcLoadingTimeMax,Max. Ladezeit WW,,,,"4C00",,,minutes0,,,Max. WW Ladezeit bei parallel anstehender Heizungsanforderung
+r;wi,,TempIncrease,Temperaturüberhöhung,,,,"2F00",,,temp,,,Temperaturüberhöhung
+r;wi,,PreShutDownTime,Vorabschaltzeit,,,,"2D00",,,minutes0,,,Vorabschaltzeit
+r;wi,,FrostOverRideTime,Frostschutz-Verzögerung,,,,"2E00",,,hours,,,Frostschutzverzögerung
+r,,EhpBackupRelease,Freigabe Zusatzheizer,,,,"7100",,,onoff,,,Freigabe Reserveheizung
+r,,EhpTimeOfPredictedPowerCut,Erwarteter EVU Abschaltzeitpunkt,,,,"7300",,,time,,,Zeit bis zur nächsten Abschaltung durch das EVU
+r;wi,,TempFailDetectTime,Temperaturfehlererkennung nach,,,,"3300",,,temp0,,,Zeit für die Temperaturfehlererkennung
+r;wi,,EhpHeatBufferAvailable,EhpHeatBufferAvailable,,,,"5C00",,,onoff,,,Pufferspeicher vorhanden
+[SW<=345]r,,ChildProtection,Kindersicherung,,,,"6E00",,,yesno,,,Kindersicherung
+[SW>=220]r,,CoolingDay,CoolingDay,,,,"7C00",,,UCH,,,
+[SW>=220]r,,CoolingActive,Kühlung aktiv,,,,"8300",,,onoff,,,
+[SW>=202]r;wi,,YieldOld,Mitternacht Übertragswert Energieertrag,,,,"8600",,,ULG,,,Beinhaltet den Gesamtenergieertrag zur letzten Mitternacht. Wird für die monatliche Balkendarstellung und dessen Übertragung auf Austauschplatinen benötigt.
+[SW>=250]r,,DiagnoseMode,DiagnoseMode,,,,"8F00",,,UCH,,,"_DiaMode_Not=0, _DiaMode_Off, _DiaMode_CH, _DiaMode_DhwLoading, _DiaMode_Cooling, _DiaMode_Deicing"
+[SW>=250]r,,EmStateWorkingMode,Energiemanager Betriebsweise,,,,"9000",,,UCH,,,0 = Bereitschaft1 = Heizen2 = Kühlen
+[SW>=250]r,,EmStateCooling,Energiemanager Kühlzustand,,,,"9100",,,UCH,,,0=off1=DhwReq2=Dhw3=TankPOverrun4=Heating5=OverpresFDhw6=OverpresFCh7=WaitChDemOverp8=WaitChDemCH9=WaitChDemEndDhw10=CoolingHSOff11=CoolingHSOn12=DhwWhileCool13=CoolingDhw14=StandbyHSOff15=DhwWhileStandby
+[SW>=250]r,,EmStateStandby,Energiemanager Bereitschaftszustand,,,,"9200",,,UCH,,,0=off1=DhwReq2=Dhw3=TankPOverrun4=Heating5=OverpresFDhw6=OverpresFCh7=WaitChDemOverp8=WaitChDemCH9=WaitChDemEndDhw10=CoolingHSOff11=CoolingHSOn12=DhwWhileCool13=CoolingDhw14=StandbyHSOff15=DhwWhileStandby
+[SW>=250]r,,EmStateHc,Energiemanager Heizzustand,,,,"9300",,,UCH,,,0=off1=DhwReq2=Dhw3=TankPOverrun4=Heating5=OverpresFDhw6=OverpresFCh7=WaitChDemOverp8=WaitChDemCH9=WaitChDemEndDhw10=CoolingHSOff11=CoolingHSOn12=DhwWhileCool13=CoolingDhw14=StandbyHSOff15=DhwWhileStandby
+[SW>=250]r,,HwcDemand,Warmwasseranforderung,,,,"9400",,,onoff,,,
+[SW>=250]r,,HcDemand,Heizanforderung,,,,"9500",,,onoff,,,
+[SW>=250]r,,CoolingDemand,Kühlanforderung,,,,"9600",,,onoff,,,
+[SW>=250]r,,EmSystemMode,EmSystemMode,,,,"9700",,,UCH,,,"System Betriebsweise, Werte:0 = Aus1 = Heizen2 = Kühlen3 = Warmwasser4 = Warmwasser während Heizbetrieb5 = Warmwasser während Kühlbetrieb"
+[SW>=250]r,,ParallelCoolingHwcPossible,Paralleler WW- Kühlbetrieb,,,,"9800",,,onoff,,,
+[SW>=250]r,,DesiredWorkingMode,Gewünschte Betriebsweise (HK),,,,"9A00",,,UCH,,,0 = Bereitschaft1 = Heizen2 = Kühlen
+[SW>=250]r,,SysWithCoolingSupport,Kühlsystem erkannt,,,,"9B00",,,onoff,,,
+[SW>=362]r,,reserve1,reserve 1,,,,"9D00",,,UCH,,,for future use
+# ##### HK Namen und Tel. Nummer #####,,,,,,,,,,,,,
+r;w,,HcName2,Name HK2,,,,"4108",,,hcname,,,Name für HK2
+r;w,,HcName3,Name HK3,,,,"4110",,,hcname,,,Name für HK3
+r;w,,HcName4,Name HK4,,,,"4118",,,hcname,,,Name für HK4
+r;w,,HcName5,Name HK5,,,,"4120",,,hcname,,,Name für HK5
+r;w,,HcName6,Name HK6,,,,"4128",,,hcname,,,Name für HK6
+r;w,,HcName7,Name HK7,,,,"4130",,,hcname,,,Name für HK7
+r;w,,HcName8,Name HK8,,,,"4138",,,hcname,,,Name für HK8
+r;w,,HcName9,Name HK9,,,,"4140",,,hcname,,,Name für HK9
+r;w,,HcName10,Name HK10,,,,"4148",,,hcname,,,Name für HK10
+r;w,,HcName11,Name HK11,,,,"4150",,,hcname,,,Name für HK11
+r;w,,HcName12,Name HK12,,,,"4158",,,hcname,,,Name für HK12
+r;w,,HcName13,Name HK13,,,,"4160",,,hcname,,,Name für HK13
+r;w,,HcName14,Name HK14,,,,"4168",,,hcname,,,Name für HK14
+r;w,,HcName15,Name HK15,,,,"4170",,,hcname,,,Name für HK15
+r;w,,HcName16,Name HK16,,,,"4178",,,hcname,,,Name für HK16
+r;wi,,PhoneNumberPart1,Telefonnummer Teil 1,,,,"4200",,,phone,,,Erster Teil der Telefonnummer für den Servicefall
+r;wi,,PhoneNumberPart2,Telefonnummer Teil 2,,,,"4208",,,phone,,,Zweiter Teil der Telefonnummer für den Servicefall
